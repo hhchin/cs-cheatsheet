@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+\usepackage[cm]{fullpage}
+\usepackage{bbold}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{amsthm}
+\newtheorem{defc}{Definition}
+\newtheorem*{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{fact}{Fact}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\newcommand{\question}[1] { \vspace{.1in} {\hrule} \vspace{.1in}
+\noindent {\textbf {#1} \vspace{0.1in}}
+{\hrule\vspace{.1in}}}
+
+\newcommand{\qpart}[1]{\vspace{0.1cm}\textbf{#1}\\ }
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\claim}{\vspace{10pt}\textbf{Claim: } \\}
+\newcommand{\conject}{\vspace{10pt}\textbf{Conjecture: } \\}
+\newcommand{\define}{\vspace{10pt}\textbf{Definition: } \\}
+\newcommand{\bM}{\begin{pmatrix}}
+\newcommand{\eM}{\end{pmatrix}}
+\newcommand{\BS}{\backslash}
+
+\newcommand{\customtitle}[1]{\raggedright \textbf{15-850: #1} \hspace{1.0cm} 
+ Hui Han Chin, hchin, hchin@cmu.edu \hspace{1.0cm} Collaborators: XueAnn, Bryan \\ \hrule \vspace{0.2cm}}
+%start here
+\begin{document}
+\customtitle{Homework 5}
+\qpart{1. Frequent Item Estimation}
+Let $A[n]\in \Z^k$ be the vector that tracks the count of $k$ items currently in the counters after seeing $n$ items of the stream. Note some facts of $A[n]$. 
+\begin{enumerate}
+\item $\sum A[n] = n$. The sum of the entries in $A[n]$ is the number of items seen so far. 
+\item $\forall k, A[n+1]_k \geq A[n]_k$. The vector after seeing $n+1$ items is entry wise greater or equal after seeing $n$ items as no counter is ever decreased. 
+\item If item $i$ is not in the counters, then $q_i=0$. Else, $q_i \geq f_i$, since the counter values are never decrease and by Fact 2.
+\end{enumerate}
+To prove $|q_i - f_i| \leq \frac{n}{k}$, we show this in 2 parts; $-\frac{n}{k} \leq q_i - f_i \leq \frac{n}{k}$ \\
+$q_i - f_i$ is minimized when $q_i=0$, which can be achieved if $i$ is not in the counters after seeing all $n$ items. To upper bound $f_i$, suppose after seeing $n-1$ item, item $i$ is the smallest counter such that it gets replace upon seeing the $n$th item. We know this is the largest possible value for $f_i$ by Fact 2.
+\begin{align*}
+\sum A[n-1] &= n-1 &&\text{by Fact 1} \\
+k * f_i &\leq n-1 && \text{Since it is smallest} \\
+f_i &\leq \frac{n-1}{k} \leq \frac{n}{k}\\
+-f_i &\geq -\frac{n}{k} \\
+q_i -f_i &\geq -\frac{n}{k} 
+\end{align*}
+To maximize, $q_i - f_i$, by Fact 2, $q_i$ is maximized when the $f_i$ items are place last in the $n$ item stream. When item $i$ was first added to the counter, the value of the smallest counter would be $q_i - f_i$
+\begin{align*}
+k*(q_i-f_i) &\leq n-f_i &&\text{by Fact 1}\\
+k*(q_i-f_i) &\leq n \\
+q_i-f_i &\leq \frac{n}{k}
+\end{align*}
+Combining both parts, we have $|q_i-f_i|\leq \frac{n}{k}$ \qed \bigskip \\
+\newpage
+
+
+\qpart{2. Unique Item Estimation}
+\textbf{a)} Let $P[n,i]$ be the probability that the counter is $i$ after seeing $n$ elements of the stream. Note the following
+\begin{enumerate}
+\item $P[n+1,1] = (1-2^{-1}) P[n,1] $
+\item $P[n+1,n+1] = 2^{-n} P[n,n]$
+\item $P[n+1,i] = 2^{-i+1} P[n,i-1] + (1-2^{-i}) P[n,i]$ 
+\end{enumerate}
+Assume for induction after seeing $n$ items, $E[n] = n$
+\begin{align*}
+&=E[n+1]-E[n]  \\
+&= \sum^{n+1}_{i=1} P[n+1,i] (2^i-1) - \sum^{n}_{i=1} P[n,i] (2^i-1)\\
+&=P[n+1,n+1](2^{n+1}-1) + \sum^n_{i=1}((2^i-1)(P[n+1,i]-P[n,i])) \\
+&=P[n,n](2-2^{-n}) - 2^{-1}P[n,1] + \sum^n_{i=2}((2^i-1)(2^{-i+1}P[n,i]-2^{-i}P[n,i]) \\
+&=P[n,n](2-2^{-n}) - 2^{-1}P[n,1] + \sum^n_{i=2}2P[n,i-1] - \sum^n_{i=2}P[n,i]  + \sum^n_{i=2}(2^{-i+1}P[n,i-1]-2^{-i}P[n,i]) \\
+&=P[n,n](2-2^{-n}) - 2^{-1}P[n,1] +2(1-P[n,n])-(1-P[n,1])+2^{-n}P[n,n]-2^{-1}P[n,1]\\
+&=(2-1) + P[n,1](-2^{-1}+1-2^{-1}) + P[n,n](-2+2^{-n}+2-2^{-n})\\
+&=1 \\
+\Rightarrow E[n+1] &= E[n]+1 = n+1
+\end{align*}
+Assume for induction after seeing $n$ items, $Var[n] = \frac{n(n-1)}{2}$
+\begin{align*}
+&=Var[n+1]-Var[n] \\
+&=E[(n+1)^2]-E^2[(n+1)] - E[n^2] + E^2[n]\\
+&=\sum^{n+1}_{i=1}(P[n+1,i](2^i-1)^2)-\sum^{n}_{i=1}(P[n,i](2^i-1)^2) + n^2-(n+1)^2 \\
+&=\sum^{n}_{i=1}\left( (2^i-1)^2 (P[n+1,i]-P[n,i]) \right) + P[n+1,n+1](2^{n+1}-1)^2-(2n+1)\\
+&=\sum^{n}_{i=2}\left( (2^{2i}-2^{i+1}+1)(2^{-i+1} P[n,i-1]-2^{-i}P[n,i]) \right) \cdots\\
+&-2^{-1}P[n,1] + P[n,n](2^{n+2}-4+2^{-n})-(2n+1)\\
+&=\sum^{n}_{i=2}P[n,i-1](2^{i+1}-2^2) - \sum^{n}_{i=2}P[n,i](2^{i}-1-1)+ \sum^{n}_{i=2}\left((2^{-i+1})P[n,i-1] -2^{-i}P[n,i])\right) \cdots\\
+&+ P[n,n](2^{n+2}-4+2^{-n})-(2n+1)\\
+&=4(n-(2^{n}-1)P[n,n]) - (n-1+2^{-1}P[n,1])+(2^{-1}P[n,1]-2^{-n}P[n,n]) \cdots\\
+& + P[n,n](2^{n+2}-4+2^{-n})-(2n+1)\\
+&=n \text{, by mad cancellation}\\
+\Rightarrow Var[n+1] &=n+Var[n] = \frac{n(n+1)}{2}\\
+\end{align*}
+\textbf{c)} Let $S = {s_i}, s_i\in [0,1], |S| = l = 10\log{\delta^{-1}}$ where the $s_i$ is a variable if the $i$th $k_0$-mean counter succeeds.
+Each of the $k_0$ mean counter has probability of $\frac{1}{8}$ of succeeding. Apply Chernoff Hoeffding (CH) on the $S$. The expectation of $S$ is $E(S) = \frac{10}{8}(\log {\delta^{-1}})$. Median counter fails if more than half fails. Hence we need to find $z$ such that
+\begin{align*}
+(1-z) E(S) &= \frac{1}{2} (10\log{\delta^{-1}})\\
+z &= \frac{3}{4} \\
+Pr[\text{Median counter fails}] &= Pr[S <(1-z)\mu]\\
+&\leq \exp(\frac{-k^2\mu}{2}) \text{, by CH}\\
+&=\exp(-\frac{9}{16}\frac{10}{16}\log(\delta^{-1})) \\
+&\leq \exp(\log\delta) \\
+\Rightarrow Pr[\text{Median counter fails}] &\leq \delta
+\end{align*}
+\qed
+\newpage
+
+
+\qpart{3. Streaming Counter}
+From lecture notes, given $h$ a 2-universal hash, $E[(h(i)(h(i)]=1$. For $i\neq j$, $E[(h(i)(h(j)]=0$ \\
+\textbf{a}
+\begin{align*}
+E[A(q)] &= E[h_{g(q)}(q) C_{g(q)}] \\
+&= E[h_{g(q)}(q) \sum_e h_{g(q)}(e)] \\
+&= E[\sum_e h_{g(q)}(q)h_{g(q)}(e)] \\
+&= E[\sum_{e=q} h_{g(q)}(q)h_{g(q)}(e)]+ E[\sum_{e\neq q}h_{g(q)}(q)h_{g(q)}(e)] \\
+&=x_q+0
+\end{align*}
+\textbf{b}
+Let $\mathbbm{1}_{g(i)=g(q)}$ be the indicator function that would be used to select which $C$ counter to use.
+\begin{align*}
+Var[A(q)] &= E[(A(q)-x_q)^2]\\
+&= E[(h_{g(q)}(q)\sum x_i h_{g(q)}(i)\mathbbm{1}_{g(i)=g(q)}-x_q)^2]\\
+&= E[(\sum_{i\neq q} h_{g(q)}(q)h_{g(q)}(i)\mathbbm{1}_{g(i)=g(q)})^2]\\
+&= E[(\sum_{(i,j) \neq q} x_i x_j (h_{g(q)}(q))^2 h_{g(q)}(i) h_{g(q)}(j)\mathbbm{1}_{g(i)=g(q)}\mathbbm{1}_{g(j)=g(q)}]\\
+&= \sum_{(i,i) \neq q} E[x^2_i (h_{g(q)}(q))^2 (h_{g(q)}(i))^2 (\mathbbm{1}_{g(i)=g(q)})^2 \\
+&+ \sum_{i\neq j \& (i,j) \neq q} E[x_i x_j (h_{g(q)}(q))^2 h_{g(q)}(i) h_{g(q)}(j)\mathbbm{1}_{g(i)=g(q)}\mathbbm{1}_{g(j)=g(q)}]\\
+&=\frac{1}{d}\sum_{i\neq q} x_i^2 + 0 \hspace{5cm} \text{by 2-universal hash}\\
+&=\frac{1}{d}(F_2 -x_q^2) \\
+&\leq \frac{F_2}{d}
+\end{align*}
+\textbf{c}
+\begin{align*}
+Pr[|A(q)| \geq \mu + k \sigma ] &\leq \frac{1}{k^2} && \text{Chebyshev's inequality}\\
+Pr[|A(q)| \geq x_q + k \sqrt{\frac{1}{d}(F_2-x_q)}] & \leq \frac{1}{k^2} \\
+Pr[|A(q)| \geq x_q + k \sqrt{\frac{1}{d}F_2}] & \leq \frac{1}{k^2} \\
+Pr[|A(q)| \geq x_q + \epsilon \sqrt{F_2}] &\leq \delta &&\text{subsituting d and $k = \delta^{-0.5}$} \\
+\Rightarrow Pr[|A(q)| \leq x_q + \epsilon \sqrt{F_2}] &\geq 1-\delta \\
+\end{align*}
+\newpage
+\textbf{d}
+Given that $d = c_2/\epsilon^2$, set $k=\sqrt{c_2}$. We get the mean counter $A(q)$ of equality,
+$$Pr[A(q) \leq x_q - \epsilon \sqrt{F_2}] \geq 1-\frac{1}{c_2}$$
+Apply Chernoff Hoeffding (CH) on the $t=c_1 \log \delta^{-1}$ mean counters. Let $S$ be the event number of mean counter sucess. For median $M(q)$ to succeed, we need $\frac{1}{2}$ of the $A(q)$ counters to succeed i.e $S \geq 0.5$. Since each $A(q)$ counter succeeds with at least $1-\frac{1}{c_2}$, the mean of the event, `$M(q)$ success' is $t(1-\frac{1}{c_2})$
+\begin{align*}
+(1-k)(1-\frac{1}{c_2})t &= \frac{1}{2}t && \text{want to get}\\
+k &= \frac{c_2-2}{2(c_2-1)}\\
+Pr[S\leq (1-k)\mu]  &\leq \exp(\frac{-k^2\mu}{2}) &&\text{by CH ineq} \\
+Pr[S\leq \frac{1}{2}t ]  &\leq \exp(\frac{-k^2 (1-\frac{1}{c_2})c_1log(\delta^{-1}) }{2}) &&\text{prob $M(q)$ fails} \\
+&\leq \exp(\alpha \log \delta^{-1}) &&\text{for some constant $\alpha$} \\
+&= \delta^{-\alpha}\\
+\Rightarrow Pr[\text{M(q) success}] &\geq 1-\delta && \text{pick $c_1, c_2$ such that $\alpha = -1$}
+\end{align*}
+\qed
+\newpage
+\qpart{5. Matrix Chernoff }
+Useful property (vi)
+\begin{align*}
+\forall x\in X, f(x) &\leq g(x) && \text{Suppose given for random variable $X$ } \\
+p(x) f(x) &\leq p(x) g(x) &&\text{Probability of $X=x$ }\\
+\sum_X p(x) f(x) &\leq \sum_X p(x) g(x) \\
+E(f(x)) & \leq E(g(x))
+\end{align*}
+Useful property (vii). If $X$ is symmetric, then $e^X$ is PSD.
+\begin{align*}
+e^{\frac{X}{2}} &= (e^{\frac{X}{2}})^T && \text{check by def of $e^X$} \\
+v^T e^X v &= v^T (e^{\frac{X}{2}}) (e^{\frac{X}{2}}) v \\
+&= v^T (e^{\frac{X}{2}})^T (e^{\frac{X}{2}}) v \\
+&= ((e^{\frac{X}{2}})v)^T (e^{\frac{X}{2}} v) \\
+&= \| (e^{\frac{X}{2}}) v \|^2 \geq 0 \\
+\Rightarrow \forall v, v^T e^X v &\geq 0
+\end{align*}
+\textbf{a)}
+\begin{align}
+Pr[\lambda_1(S_n) \geq l] & = Pr[e^{\lambda_1(tS_n)} \geq e^{tl}] &&\text{$e^t$ is a monotone increasing map}\\
+& = Pr[\lambda_1(e^{tS_n}) \geq e^{tl}]  &&\text{by ii}\\
+&\leq Pr[\sum_{i\in [1,n]}(\lambda_i(e^{tS_n})) \geq e^{tl}]  &&\text{since $\lambda_1 \leq \sum \lambda_i$}\\
+&= Pr[tr(e^{tS_n}) \geq e^{tl}] && \text{by i}\\
+&\leq e^{-tl} E[tr(e^{tS_n})] && \text{by markov inequality}
+\end{align}
+\textbf{b)} 
+
+\begin{align}
+E[tr(e^{tS_n})] &\leq E[tr(e^{tS_{n-1}} \cdot e^{tX_n})] && \text{by iii, vi} \\
+&\leq E[tr(e^{tS_{n-1}}) \cdot \lambda_1(e^{tX_n})] && \text{by iv, vii} \\
+&= E[tr(e^{tS_{n-1}})] \cdot E[\lambda_1(e^{tX_n})] && \text{by independence of $X_i$} \\
+&\leq E[tr(e^{tS_{n-1}})] \cdot \lambda_1(E[e^{tX_n}])
+\end{align}
+\textbf{c)} 
+\begin{align}
+E[tr(e^{tS_n})] &\leq E[tr(e^{tX_1})]\prod_{i=2}^n \lambda_1(E[e^{tX_i}]) && \text{n-1 application of part b}\\
+&= tr(E[(e^{tX_1}])\prod_{i=2}^n \lambda_1(E[e^{tX_i}]) && \text{by v}\\
+&= \sum_i \lambda_i(E[(e^{tX_1}])\prod_{i=2}^n \lambda_1(E[e^{tX_i}]) && \text{by i}\\
+&\leq d \lambda_1(E[(e^{tX_1}])\prod_{i=2}^n \lambda_1(E[e^{tX_i}]) && \text{as $\max_i \lambda_i = \lambda_1$}\\
+&= d \prod_{i=1}^n \lambda_1(E[e^{tX_i}])\\
+\Rightarrow Pr[\lambda_1(S_n) \geq l] &\leq e^{-tl} E[tr(e^{tS_n})] && \text{by a)} \\
+&\leq e^{-tl}d \prod_{i=1}^n \lambda_1(E[e^{tX_i}])   && \text{by above)}
+\end{align}
+\textbf{d)} Notice in (3), we did not use the fact it was $\lambda_1$. This implies, 
+$$\forall i\in [n], Pr[\lambda_i(S_n) \geq l] \leq d e^{-tl} \prod_{i=1}^n \lambda_1(E[e^{tX_i}])$$
+Now set $-S_n = -\sum X_i$
+\begin{align}
+Pr[\lambda_d(-S_n) \geq l] \leq d e^{-tl} \prod_{i=1}^n \lambda_1(E[e^{-tX_i}]) \\
+Pr[\lambda_d(S_n) \leq -l] \leq d e^{-tl} \prod_{i=1}^n \lambda_1(E[e^{-tX_i}])
+\end{align}
+\qed
+\end{document}
+
+
