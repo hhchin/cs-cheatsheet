@@ -10,13 +10,14 @@ cheatsheet:
 
   - key: 'ShermanM'
     name: 'Sherman Morrison Formula'
-    result: 'Give \textbf{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. Then $A+uv^T$ is invertible iff $1+v^TA^{-1}u\neq$. (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}'
+    result: 'Given \textbf{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. 
+    Then $A+uv^T$ is invertible iff $1+v^TA^{-1}u \neq 0$. Then $(A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$'
     tags: 'matrix,inversion,rank-1-update'
     related: 'WoodburyId'
 
   - key: 'CsIneq'
     name: 'Cauchy Schwarz Inequality'
-    result: '$|\langle U, V \rangle| \leq \langle U, U\rangle \dot \langle V, V\rangle $'
+    result: '$ |\langle U, V \rangle| \leq \langle U, U\rangle \dot \langle V, V\rangle $'
     tags: 'vector,inequality,inner product'
     related: 'TriangleIneq'
 
@@ -34,25 +35,27 @@ cheatsheet:
 
   - key: 'HolderIneq'
     name: 'Holder Inequality'
-    result: 'Let $p,q\in [1, \infty], 1/p+1/q=1$. Then for all real/complex functions $f,g$,$\|\fg|_1 \leq \|f\|_p\|g\|_q$'
+    result: 'Let $p,q\in [1, \infty], 1/p+1/q=1$. Then for all real/complex functions $f,g$,$\|fg|_1 \leq \|f\|_p\|g\|_q$'
     tags: 'norm'
     related: 'MinkowskiIneq'
 
   - key: 'JesenIneq'
     name: 'Jensen Inequality'
-    result: 'if X is a rv and $\phi$ is convex, then $\phi(E(X)) \leq E(\phi(X))$'
+    result: 'Given X is a rv and $\phi$ is convex. Then $\phi(E(X)) \leq E(\phi(X))$'
     tags: 'probability,expectation,convex'
     related: ''
 
   - key: 'JohnsonLProp'
     name: 'Johnson Lindenstrauss Property'
-    result: 'A distribution on matrices $S\in R^{k \times n}$ has $(\epsilon, \delta, l)$-JL moment property if $\forall x\in R^n, |x|_2=1$, $E_S(||Sx|^2_2-1|^l)\leq \epsilon^l\delta$'
+    result: 'A distribution on matrices $S\in R^{k \times n}$ has $(\epsilon, \delta, l)$-JL moment property 
+    if $\forall x\in R^n, |x|_2=1$, $E_S(||Sx|^2_2-1|^l)\leq \epsilon^l\delta$'
     tags: 'matrix,expectation'
     related:
 
   - key: 'HoeffdingIneq'
-    name: 'Hoeffding Ineq' 
-    result: 'Let $X_1,\cdots,X_n$ be independent rv in $[0,1]$. Let $\bar{X} = \frac{1}{n}\sum_i{X_i}$. Then $P(\bar{X}-E(\bar{X})\geq t) \leq \exp(-2nt^2)$ '
+    name: 'Hoeffding Ineq'
+    result: 'Let $X_1,\cdots,X_n$ be independent rv in $[0,1]$. Let $\bar{X} = \frac{1}{n}\sum_i{X_i}$. 
+    Then $P(\bar{X}-E(\bar{X})\geq t) \leq \exp(-2nt^2)$ '
     tags: 'expectation,probability'
     related: 'ChernoffIneq'
 

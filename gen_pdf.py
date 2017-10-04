@@ -16,7 +16,7 @@ def main():
 	
 	res_dump = []
 	for res in results:
-		res_dump.append('\\textbf{{{}}}: {}\\\\'.format(res['name'], res['result']))
+		res_dump.append('\\textbf{{{}}} & {}\\\\ \\hline'.format(res['name'], res['result']))
 
 
 
