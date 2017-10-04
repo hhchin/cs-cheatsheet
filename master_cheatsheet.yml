@@ -53,7 +53,7 @@ cheatsheet:
     related:
 
   - key: 'HoeffdingIneq'
-    name: 'Hoeffding Ineq'
+    name: 'Hoeffding Inequality'
     result: 'Let $X_1,\cdots,X_n$ be independent rv in $[0,1]$. Let $\bar{X} = \frac{1}{n}\sum_i{X_i}$. 
     Then $P(\bar{X}-E(\bar{X})\geq t) \leq \exp(-2nt^2)$ '
     tags: 'expectation,probability'
