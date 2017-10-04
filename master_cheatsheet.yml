@@ -1,59 +1,72 @@
 cheatsheet:
+ # use only ' and not " due to yml pharsing of $
+ #- key: 'FirstauthorSubauthorsType' 
+
   - key: 'WoodburyId'
-    name: 'Woodbury matrix identity'
+    name: 'Woodbury Matrix Identity'
     result: '$(A+UCV)^{-1} = A^{-1} - A^{-1}U(C^{-1}+VA^{-1}U)^{-1}VA^{-1}$'
     tags: 'matrix,inversion'
     related: ShermanM
 
+  - key: 'ShermanM'
+    name: 'Sherman Morrison Formula'
+    result: 'Give \textbf{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. Then $A+uv^T$ is invertible iff $1+v^TA^{-1}u\neq$. (A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}'
+    tags: 'matrix,inversion,rank-1-update'
+    related: 'WoodburyId'
+
   - key: 'CsIneq'
-    name: 'Cauchy–Schwarz inequality'
+    name: 'Cauchy Schwarz Inequality'
     result: '$|\langle U, V \rangle| \leq \langle U, U\rangle \dot \langle V, V\rangle $'
     tags: 'vector,inequality,inner product'
-    related: ''
+    related: 'TriangleIneq'
 
   - key: 'MarkovIneq'
-    name: 'Markov inequality'
-    result:
-    tags:
-    related:
+    name: 'Markov Inequality'
+    result: $X$ is a non-negative rv and $a>0$ then $P(X \geq a) \leq \frac{E(X)}{a}$
+    tags: 'probability'
+    related: 'ChebyshevIneq'
 
-  - key:
+  - key: 'MinkowskiIneq'
     name: 'Minkowski inequality'
-    result:
+    result: $\|f+g\|_p \leq \|f\|_p + \| g\|_p$
     tags:
-    related:
+    related: 'ChebyshevIneq,HolderIneq'
 
-  - key:
-    name: "Holder inequality"
-    result:
-    tags:
-    related:
+  - key: 'HolderIneq'
+    name: 'Holder Inequality'
+    result: 'Let $p,q\in [1, \infty], 1/p+1/q=1$. Then for all real/complex functions $f,g$,$\|\fg|_1 \leq \|f\|_p\|g\|_q$'
+    tags: 'norm'
+    related: 'MinkowskiIneq'
+
+  - key: 'JesenIneq'
+    name: 'Jensen Inequality'
+    result: 'if X is a rv and $\phi$ is convex, then $\phi(E(X)) \leq E(\phi(X))$'
+    tags: 'probability,expectation,convex'
+    related: ''
 
   - key: 'JohnsonLProp'
-    name: "Johnson Lindenstrauss product"
-    result:
-    tags:
+    name: 'Johnson Lindenstrauss Property'
+    result: 'A distribution on matrices $S\in R^{k \times n}$ has $(\epsilon, \delta, l)$-JL moment property if $\forall x\in R^n, |x|_2=1$, $E_S(||Sx|^2_2-1|^l)\leq \epsilon^l\delta$'
+    tags: 'matrix,expectation'
     related:
 
-  - key: 'ChernoffHBound'
-    name: ''
-    result:
-    tags:
-    related:
+  - key: 'HoeffdingIneq'
+    name: 'Hoeffding Ineq' 
+    result: 'Let $X_1,\cdots,X_n$ be independent rv in $[0,1]$. Let $\bar{X} = \frac{1}{n}\sum_i{X_i}$. Then $P(\bar{X}-E(\bar{X})\geq t) \leq \exp(-2nt^2)$ '
+    tags: 'expectation,probability'
+    related: 'ChernoffIneq'
 
-  - key: "ChebyshevIneq"
-    name: "Chebyshev's inequality"
-    result:
-    tags:
-    related:
-
-
+  - key: 'ChebyshevIneq'
+    name: 'Chebyshev Inequality'
+    result: $P(|X-E(X)| \geq a) \leq \frac{Var(X)}{a^2}$
+    tags: 'probability'
+    related: 'MarkovIneq'
         
 
-  - key: ""
-    name: ""
-    result:
-    tags:
+  - key: 'GoldenTIneq'
+    name: 'Golden Thompson'
+    result: 'For Hermitian matrices A,B $tr \exp(A+B) \leq tr(\exp(A)\exp(B))$'
+    tags: 'matrix,trace'
     related:
 
 
