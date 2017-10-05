@@ -74,13 +74,13 @@ cheatsheet:
   - key: 'OppenheimerIneq'
     name: 'Oppenheimer Inequality'
     result: 'For PSD matrices A, B, $\det(A \circ B) \ge \left( \prod a_{ii} \right) \det(B)$'
-    tags: 'matrix, determinant, hadarmard'
+    tags: 'matrix,determinant,hadarmard'
     related: ''
 
   - key: 'KyFanIneq1'
     name: 'Ky Fan Matrix Inequality'
     result: 'Let A, B be $n \times n$ Hermitian matrices. Then $\lambda(A) + \lambda(B) \succ \lambda(A+B)$, where $\succ$ denotes the majorization relation.'
-    tags: 'matrix, eigenvalue'
+    tags: 'matrix,eigenvalue'
     related: ''
 
   - key: 'McDiarmidIneq'
@@ -98,4 +98,4 @@ cheatsheet:
     result: 'Let $X_1,...X_n$ be iid $(0,1)$ Gaussian rv. Let $f:\mathbb{R}^n \mapsto \mathbb{R}$ be $1$-Lipschitz. 
     Then for any $\lambda >0$, $\mathbb{P}(|f(X) - \mathbb{E}(f(X))| \geq \lambda) \leq C\exp(-c\lambda^2)$ for constants $c, C$.'
     tags: 'gaussian,concentration,probability,expectation'
-    reslated: 'BorelTISIneq'
+    related: 'BorelTISIneq'
