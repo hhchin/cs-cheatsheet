@@ -65,19 +65,14 @@ cheatsheet:
     tags: 'probability'
     related: 'MarkovIneq'
         
-
   - key: 'GoldenTIneq'
     name: 'Golden Thompson'
     result: 'For Hermitian matrices A,B $tr \exp(A+B) \leq tr(\exp(A)\exp(B))$'
     tags: 'matrix,trace'
-    related:
+    related: ''
 
-
-
-
-
-
-
-
-
-
+  - key: 'OppenheimerIneq'
+    name: 'Oppenheimer Inequality'
+    result: 'For PSD matrices A, B, $\det(A \circ B) \ge \left( \prod a_{ii} \right) \det(B)$'
+    tags: 'matrix, determinant, hadarmard'
+    related: ''
