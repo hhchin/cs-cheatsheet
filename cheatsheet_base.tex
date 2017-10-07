@@ -13,15 +13,16 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{array}
+\usepackage{longtable}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\setlength\extrarowheight{0.1cm}
-
+%\setlength\extrarowheight{0.2cm}
+\renewcommand{\arraystretch}{1.5} % in %
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
 \setlength\parindent{0pt}
 
 \begin{document}
-\begin{tabular}{|>{\raggedright}m{4.5cm}|m{13cm}|} \hline
+\begin{longtable}{|>{\raggedright}m{4.5cm}|m{13cm}|} \hline
 %%MAGIC%%
-\end{tabular}
+\end{longtable}
 \end{document}

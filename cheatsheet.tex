@@ -13,15 +13,16 @@
 \usepackage{amsthm}
 \usepackage{mathtools}
 \usepackage{array}
+\usepackage{longtable}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\setlength\extrarowheight{0.1cm}
-
+%\setlength\extrarowheight{0.2cm}
+\renewcommand{\arraystretch}{1.5} % in %
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
 \setlength\parindent{0pt}
 
 \begin{document}
-\begin{tabular}{|>{\raggedright}m{4.5cm}|m{13cm}|} \hline
+\begin{longtable}{|>{\raggedright}m{4.5cm}|m{13cm}|} \hline
 \textbf{Woodbury Matrix Identity} & $(A+UCV)^{-1} = A^{-1} - A^{-1}U(C^{-1}+VA^{-1}U)^{-1}VA^{-1}$\\ \hline
 \textbf{Sherman Morrison Formula} & Given \textbf{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. Then $A+uv^T$ is invertible iff $1+v^TA^{-1}u \neq 0$. Then $(A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$\\ \hline
 \textbf{Cauchy Schwarz Inequality} & $ |\langle U, V \rangle| \leq \langle U, U\rangle \dot \langle V, V\rangle $\\ \hline
@@ -35,10 +36,13 @@
 \textbf{Golden Thompson} & For Hermitian matrices A,B $tr \exp(A+B) \leq tr(\exp(A)\exp(B))$\\ \hline
 \textbf{Oppenheimer Inequality} & For PSD matrices A, B, $\det(A \circ B) \ge \left( \prod a_{ii} \right) \det(B)$\\ \hline
 \textbf{Ky Fan Matrix Inequality} & Let A, B be $n \times n$ Hermitian matrices. Then $\lambda(A) + \lambda(B) \succ \lambda(A+B)$, where $\succ$ denotes the majorization relation.\\ \hline
-\textbf{McDiarmid Inequality} & Multidimensional Hoeffding. Let $X_1,...X_m$ be independent rv taking values in $\chi$. Further, let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ that satisfies coordinate-wise bounded differences, $\forall i \forall x_1,...x_m,x_i^* \in \chi$, $\left| f(x_1, ... , x_i, ... x_m) - f(x_1,...,x_i^*, ...x_m) \right| \leq c_i$. Then for $\epsilon>0$, $\mathbb{P}(f - \mathbb{E}(f)) \leq \exp\left(  \frac{-2\epsilon^2}{\sum_{i=1}^{m}c_i^2} \right)$.\\ \hline
-\textbf{Cortes Sampling Concentration Inequality} & Let $X_i, i \in [m]$ be a set of drawn \textit{without replacement} from an underlying finite set of $m+u$ elements. Let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ be symmetric (up to permutation of parameters) and obey coordinate-wise bounded differences, then $\epsilon>0$, $\mathbb{P}(f - \mathbb{E}(f)) \leq \exp\left(  \frac{-2\epsilon^2}{\alpha(m,u)c^2} \right)$, where $\alpha(m,u)=\frac{mu}{m+u-0.5} \times \frac{1}{1-1/(2\max(m,u))}$.\\ \hline
+\textbf{McDiarmid Inequality} & Multidimensional Hoeffding. Let $X_1,...X_m$ be independent rv taking values in $\chi$. Further, let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ that satisfies coordinate-wise bounded differences, $\forall i \forall x_1,...x_m,x_i^* \in \chi$, $\left| f(x_1, ... , x_i, ... x_m) - f(x_1,...,x_i^*, ...x_m) \right| \leq c_i$. Then $\mathbb{P}(|f - \mathbb{E}(f)| \geq \epsilon) \leq \exp\left(  \frac{-2\epsilon^2}{\sum_{i=1}^{m}c_i^2} \right)$.\\ \hline
+\textbf{Cortes Sampling Concentration Inequality} & Let $X_i, i \in [m]$ be a set of drawn \textit{without replacement} from an underlying finite set of $m+u$ elements. Let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ be symmetric (up to permutation of parameters) and obey coordinate-wise bounded differences, then $\mathbb{P}(|f - \mathbb{E}(f)| \geq \epsilon) \leq \exp\left(  \frac{-2\epsilon^2}{\alpha(m,u)c^2} \right)$, where $\alpha(m,u)=\frac{mu}{m+u-0.5} \times \frac{1}{1-1/(2\max(m,u))}$.\\ \hline
 \textbf{Simple Gaussian Concentration Inequality} & Let $X_1,...X_n$ be iid $(0,1)$ Gaussian rv. Let $f:\mathbb{R}^n \mapsto \mathbb{R}$ be $1$-Lipschitz. Then for any $\lambda >0$, $\mathbb{P}(|f(X) - \mathbb{E}(f(X))| \geq \lambda) \leq C\exp(-c\lambda^2)$ for constants $c, C$.\\ \hline
 \textbf{Bounds for central term in binomial coefficient} & $\frac{4^n}{2n+1} \leq \binom{2N}{N} \leq 4^n$\\ \hline
+\textbf{Generating function of Catalan Numbers} & $G(z) = \sum_{i=0}^{\infty} \frac{1}{n+1} \binom{2n}{n} z^i = \frac{1-\sqrt{1-4z}}{2z} = \frac{2}{1+\sqrt{1-4z}}$\\ \hline
 \textbf{Weyl Matrix Perturbation Inequality} & If $M=H+P$ are $n \times n$ matrices with eigenvalues $\mu_i, \nu_i, \rho_i$ (ordered in descending order) respectively, then $\nu_i + \rho_n \leq \mu_i \leq \nu_i + \rho_1$\\ \hline
-\end{tabular}
+\textbf{Walds Identity} & Let $X_1,...$ be a sequence of (potentially infinite) independent random variables with identical means. Let $N$ be any \textit{stopping time} (or independent of $X$s). Let $S_N=\sum_{i=1}^{N}X_i$. Then $\mathbb{E}(S_N)=\mathbb{E}(N)\mathbb{E}(X)$. Note $N$ can be weakly dependent on $X$.\\ \hline
+\textbf{Variance of Random Sum} & If $N$ and $X_i$ are independent and $X$s have equal variance, $\text{Var}(\sum_{i=1}{X}) = \mathbb{E}(N)\text{Var}(X_i) + \mathbb{E}(X)^2\text{Var}(N)$\\ \hline
+\end{longtable}
 \end{document}
