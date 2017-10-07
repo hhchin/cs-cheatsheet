@@ -93,9 +93,30 @@ cheatsheet:
     tags: 'expectation,probability,concentration'
     related: 'HoeffdingIneq'
 
+  - key: 'CortesIneq'
+    name: 'Cortes Sampling Concentration Inequality'
+    result: 'Let $X_i, i \in [m]$ be a set of drawn \textit{without replacement} from an underlying finite set of $m+u$ elements. Let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ be symmetric (up to permutation of parameters) and obey coordinate-wise bounded differences,
+    then $\epsilon>0$, $\mathbb{P}(f - \mathbb{E}(f)) \leq \exp\left(  \frac{-2\epsilon^2}{\alpha(m,u)c^2} \right)$, where $\alpha(m,u)=\frac{mu}{m+u-0.5} \times \frac{1}{1-1/(2\max(m,u))}$.'
+    tags: 'expectation,probability,concentration'
+    related: 'McDiarmidIneq'
+
   - key: 'GaussianConc1'
     name: 'Simple Gaussian Concentration Inequality'
     result: 'Let $X_1,...X_n$ be iid $(0,1)$ Gaussian rv. Let $f:\mathbb{R}^n \mapsto \mathbb{R}$ be $1$-Lipschitz. 
     Then for any $\lambda >0$, $\mathbb{P}(|f(X) - \mathbb{E}(f(X))| \geq \lambda) \leq C\exp(-c\lambda^2)$ for constants $c, C$.'
     tags: 'gaussian,concentration,probability,expectation'
     related: 'BorelTISIneq'
+
+  - key: 'CentralBinomialIneq'
+    name: 'Bounds for central term in binomial coefficient'
+    result: '$\frac{4^n}{2n+1} \leq \binom{2N}{N} \leq 4^n$'
+    tags: 'binomial'
+    related:
+
+  - key: 'WeylIneq'
+    name: 'Weyl Matrix Perturbation Inequality'
+    result: 'If $M=H+P$ are $n \times n$ matrices with eigenvalues $\mu_i, \nu_i, \rho_i$ (ordered in descending order) respectively, 
+    then $\nu_i + \rho_n \leq \mu_i \leq \nu_i + \rho_1$'
+    tags: 'matrix, eigenvalue,perturbation'
+    related:
+
