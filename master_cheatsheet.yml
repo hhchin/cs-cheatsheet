@@ -89,14 +89,14 @@ cheatsheet:
     Further, let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ that satisfies coordinate-wise bounded differences, 
     $\forall i \forall x_1,...x_m,x_i^* \in \chi$,
     $\left| f(x_1, ... , x_i, ... x_m) - f(x_1,...,x_i^*, ...x_m) \right| \leq c_i$.
-    Then for $\epsilon>0$, $\mathbb{P}(f - \mathbb{E}(f)) \leq \exp\left(  \frac{-2\epsilon^2}{\sum_{i=1}^{m}c_i^2} \right)$.'
+    Then $\mathbb{P}(|f - \mathbb{E}(f)| \geq \epsilon) \leq \exp\left(  \frac{-2\epsilon^2}{\sum_{i=1}^{m}c_i^2} \right)$.'
     tags: 'expectation,probability,concentration'
     related: 'HoeffdingIneq'
 
   - key: 'CortesIneq'
     name: 'Cortes Sampling Concentration Inequality'
     result: 'Let $X_i, i \in [m]$ be a set of drawn \textit{without replacement} from an underlying finite set of $m+u$ elements. Let $f: \chi^m \mapsto \mathbb{R}$ be a function of $X_1,...,X_m$ be symmetric (up to permutation of parameters) and obey coordinate-wise bounded differences,
-    then $\epsilon>0$, $\mathbb{P}(f - \mathbb{E}(f)) \leq \exp\left(  \frac{-2\epsilon^2}{\alpha(m,u)c^2} \right)$, where $\alpha(m,u)=\frac{mu}{m+u-0.5} \times \frac{1}{1-1/(2\max(m,u))}$.'
+    then $\mathbb{P}(|f - \mathbb{E}(f)| \geq \epsilon) \leq \exp\left(  \frac{-2\epsilon^2}{\alpha(m,u)c^2} \right)$, where $\alpha(m,u)=\frac{mu}{m+u-0.5} \times \frac{1}{1-1/(2\max(m,u))}$.'
     tags: 'expectation,probability,concentration'
     related: 'McDiarmidIneq'
 
@@ -113,6 +113,12 @@ cheatsheet:
     tags: 'binomial'
     related:
 
+  - key: 'CatalanGenerating'
+    name: 'Generating function of Catalan Numbers'
+    result: '$G(z) = \sum_{i=0}^{\infty} \frac{1}{n+1} \binom{2n}{n} z^i = \frac{1-\sqrt{1-4z}}{2z} = \frac{2}{1+\sqrt{1-4z}}$'
+    tags: 'catalan,binomial'
+    related: 
+
   - key: 'WeylIneq'
     name: 'Weyl Matrix Perturbation Inequality'
     result: 'If $M=H+P$ are $n \times n$ matrices with eigenvalues $\mu_i, \nu_i, \rho_i$ (ordered in descending order) respectively, 
@@ -120,3 +126,15 @@ cheatsheet:
     tags: 'matrix, eigenvalue,perturbation'
     related:
 
+  - key: 'WaldIdentity'
+    name: 'Walds Identity'
+    result: 'Let $X_1,...$ be a sequence of (potentially infinite) independent random variables with identical means. Let $N$ be any \textit{stopping time} (or independent of $X$s).
+    Let $S_N=\sum_{i=1}^{N}X_i$. Then $\mathbb{E}(S_N)=\mathbb{E}(N)\mathbb{E}(X)$. Note $N$ can be weakly dependent on $X$.'
+    tags: 'probability'
+    related:
+
+  - key: 'VarRandomSum'
+    name: 'Variance of Random Sum'
+    result: 'If $N$ and $X_i$ are independent and $X$s have equal variance, $\text{Var}(\sum_{i=1}{X}) = \mathbb{E}(N)\text{Var}(X_i) + \mathbb{E}(X)^2\text{Var}(N)$'
+    tags: 'probability'
+    related: WaldIdentity
