@@ -138,3 +138,6 @@ cheatsheet:
     result: 'If $N$ and $X_i$ are independent and $X$s have equal variance, $\text{Var}(\sum_{i=1}{X}) = \mathbb{E}(N)\text{Var}(X_i) + \mathbb{E}(X)^2\text{Var}(N)$'
     tags: 'probability'
     related: WaldIdentity
+
+# @TODO 
+# Eckart–Young–Mirsky theorem 
