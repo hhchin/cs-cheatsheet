@@ -10,7 +10,7 @@ cheatsheet:
 
   - key: 'ShermanM'
     name: 'Sherman Morrison Formula'
-    result: 'Given \textbf{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. 
+    result: 'Given \textit{invertible} $A \in R^{n\times n}$ and $u,v\in R^n$ vectors. 
     Then $A+uv^T$ is invertible iff $1+v^TA^{-1}u \neq 0$. Then $(A+uv^T)^{-1} = A^{-1}-\frac{A^{-1}uv^TA^{-1}}{1+v^TA^{-1}u}$'
     tags: 'matrix,inversion,rank-1-update'
     related: 'WoodburyId'
@@ -138,6 +138,12 @@ cheatsheet:
     result: 'If $N$ and $X_i$ are independent and $X$s have equal variance, $\text{Var}(\sum_{i=1}{X}) = \mathbb{E}(N)\text{Var}(X_i) + \mathbb{E}(X)^2\text{Var}(N)$'
     tags: 'probability'
     related: WaldIdentity
+
+  - key: 'EckartY'
+    name: 'Eckart-Young-Mirsky Theorem'
+    result: The k-truncated SVD of a matrix $A$ gives the best rank-k approximation for $A$ in the spectral and frobenius norm. $A_k = U\Sigma_k V^T = argmin_{\text{B rank-k}}|A-B|_2 = \sigma_{k+1}(A)$
+    tags: 'low-rank, matrix'
+    related: 'WeylIneq'
 
 # @TODO 
 # Eckart–Young–Mirsky theorem 
