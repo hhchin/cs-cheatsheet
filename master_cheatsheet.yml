@@ -17,7 +17,7 @@ cheatsheet:
 
   - key: 'CsIneq'
     name: 'Cauchy Schwarz Inequality'
-    result: '$ |\langle U, V \rangle| \leq \langle U, U\rangle \dot \langle V, V\rangle $'
+    result: '$ |\langle U, V \rangle| \leq \langle U, U\rangle \cdot \langle V, V\rangle $'
     tags: 'vector,inequality,inner product'
     related: 'TriangleIneq'
 
