@@ -150,11 +150,18 @@ cheatsheet:
     result: '(i) (Armijo rule) $ f(\mathbf{x}_k+\alpha_k\mathbf{p}_k)\leq f(\mathbf{x}_k)+c_1\alpha_k\mathbf{p}_k^{\mathrm T}\nabla f(\mathbf{x}_k) $
         (ii) (Curvature) $-\mathbf{p}_k^{\mathrm T}\nabla f(\mathbf{x}_k+\alpha_k\mathbf{p}_k) \leq -c_2\mathbf{p}_k^{\mathrm T}\nabla f(\mathbf{x}_k)$, where $\alpha_k$ is step size, $\mathbf{p}_k$ is descent direction and $ 0 < c_1 < c_2 < 1 $'
     tags: 'optimization'
+
   - key: 'EulerLagrange'
     name: 'Euler-Lagrange Equation'
     result: 'Functionals of form $S(f(t)) = \int_t L\left( f(t), \dot{f}(t), t \right) dt$, 
         stationary $f$ where $\frac{\partial L(f, \dot{f}, t)}{\partial f} = \frac{d}{dt} \frac{\partial L(f, \dot{f}, t)}{\partial \dot{f}}$'
     tags: 'optimization, variational-calculus'
+
+  - key: 'kkt'
+    name: 'Karush-Kuhn-Tucker Conditions'
+    result: '$\min f(x)$ s.t. $g_i(x)\leq 0, h_j(x)=0$, {\bf Stationarity} $-\nabla f(x^*) = \sum_i \mu_i \nabla g_i(x^*) + \sum_j \lambda_j \nabla h_j (x^*)$, {\bf Primal feasibility} $g_i(x^*) \leq 0, h_j(x^*)=0$, {\bf Dual feasibility} $\mu_i \geq 0$, {\bf Complementary slackness} $\mu_i g_i(x^*)=0$'
+    tags: 'optimization'
+
 
 
 # @TODO 
